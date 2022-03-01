@@ -39,6 +39,6 @@ module "ocp_proxy_module" {
   roks_cluster        = true
   proxy-host          = module.proxy.proxy-host
   proxy-port          = module.proxy.proxy-port
-  cluster_config_file = module.dev_cluster.config_file_path
+  cluster_config_file = module.dev_cluster.platform.kubeconfig
 }
 ```
