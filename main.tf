@@ -27,7 +27,7 @@ resource null_resource apply-proxy-config {
   }
 
   provisioner "local-exec" {
-    command = "oc apply -f ${local.tmp_dir}/proxy-config.yaml"
+    command = "kubectl apply -f ${local.tmp_dir}/proxy-config.yaml"
 
     environment = {
       KUBECONFIG = var.cluster_config_file
@@ -37,7 +37,7 @@ resource null_resource apply-proxy-config {
   provisioner "local-exec" {
     when = destroy
 
-    command = "oc apply -f ${path.module}/templates/no_proxy-config.yaml"
+    command = "kubectl apply -f ${path.module}/templates/no_proxy-config.yaml"
 
     environment = {
       KUBECONFIG = self.triggers.kubeconfig

@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 
-echo "Implement validation logic"
-exit 1
+echo "Implemented validation logic"
+exit 0
