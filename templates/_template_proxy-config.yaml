@@ -1,0 +1,13 @@
+apiVersion: config.openshift.io/v1
+kind: Proxy
+metadata:
+  name: cluster
+spec:
+  httpProxy: http://${proxy_ip}:${proxy_port} 
+  httpsProxy: http://${proxy_ip}:${proxy_port}
+  noProxy: ${no_proxy_hosts}
+  readinessEndpoints:
+  - http://www.google.com 
+  - https://www.google.com
+  trustedCA:
+    name: ""
