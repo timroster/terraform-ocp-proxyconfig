@@ -1,9 +1,10 @@
-name: ""
+name: "ocp-proxyconfig"
 type: terraform
-description: ""
+description: "Configure OpenShift Cluster to use a HTTP tunnel proxy for outbound traffic"
 tags:
-    - tools
-    - devops
+    - network
+    - proxy
+    - egress
 versions:
 - platforms: []
 #  providers:
