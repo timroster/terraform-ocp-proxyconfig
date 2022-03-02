@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 
-echo "Implemented validation logic"
+echo "bypass logic temporarily"
 exit 0

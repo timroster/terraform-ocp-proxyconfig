@@ -43,5 +43,6 @@ module "ocp_proxy_module" {
   proxy-host          = module.proxy.proxy-host
   proxy-port          = module.proxy.proxy-port
   cluster_config_file = module.dev_cluster.platform.kubeconfig
+  cluster_name        = module.dev_cluster.name
 }
 ```

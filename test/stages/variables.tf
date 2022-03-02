@@ -49,3 +49,8 @@ variable "vpc_cluster" {
   default     = true
 }
 
+variable "roks_cluster" {
+  type        = bool
+  description = "Flag indicating that this is a ROKS cluster"
+}
+

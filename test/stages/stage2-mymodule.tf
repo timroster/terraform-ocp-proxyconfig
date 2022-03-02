@@ -9,5 +9,6 @@ module "ocp_proxy_module" {
   proxy-port          = var.proxy-port
   cluster_config_file = module.dev_cluster.platform.kubeconfig
   cluster_name        = module.dev_cluster.name
+  roks_cluster        = var.roks_cluster
 }
 
