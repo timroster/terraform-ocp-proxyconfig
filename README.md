@@ -18,6 +18,7 @@ The module depends on the following software components:
 
 - terraform >= v0.15
 - kubectl
+- ibmcloud cli (for ROKS cluster reboots)
 
 #### Terraform providers
 
@@ -36,6 +37,8 @@ This module makes use of the output from other modules:
 module "ocp_proxy_module" {
 
   ibmcloud_api_key    = var.ibmcloud_api_key
+  resource_group_name = module.resource_group.name
+  region              = var.region
   roks_cluster        = true
   proxy-host          = module.proxy.proxy-host
   proxy-port          = module.proxy.proxy-port

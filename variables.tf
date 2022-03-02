@@ -1,6 +1,19 @@
 variable "ibmcloud_api_key" {
   type        = string
-  description = "The IBM Cloud api token"
+  description = "The IBM Cloud api token, required for ROKS cluster rolling worker updates"
+  default     = ""
+}
+
+variable "resource_group_name" {
+  type        = string
+  description = "The resource group name, required for ROKS cluster rolling worker updates"
+  default     = ""
+}
+
+variable "region" {
+  type        = string
+  description = "The region, required for ROKS cluster rolling worker updates"
+  default     = ""
 }
 
 variable "proxy-host" {
@@ -16,6 +29,12 @@ variable "proxy-port" {
 variable "cluster_config_file" {
   type        = string
   description = "Cluster config file for Kubernetes cluster"
+}
+
+variable "cluster_name" {
+  type        = string
+  description = "Cluster name, required for ROKS cluster rolling worker updates"
+  default     = ""
 }
 
 variable "cluster_type" {
