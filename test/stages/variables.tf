@@ -15,14 +15,12 @@ variable "region" {
   description = "Region for VLANs defined in private_vlan_number and public_vlan_number."
 }
 
-variable "proxy-host" {
-  type        = string
-  description = "IP address or hostname of http proxy"
-}
-
-variable "proxy-port" {
-  type        = string
-  description = "port exposed by http proxy"
+variable "proxy_endpoint" {
+  type = object({
+    proxy_host = string
+    proxy_port = string
+  })
+  description = "Host and port exposed by HTTP tunnel proxy"
 }
 
 variable "cluster_name" {

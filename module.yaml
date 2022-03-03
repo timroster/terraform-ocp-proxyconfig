@@ -34,14 +34,10 @@ versions:
      moduleRef:
        id: cluster
        output: config_file_path
-   - name: proxy-host
+   - name: proxy_endpoint
      moduleRef:
        id: proxy
-       output: proxy-host
-   - name: proxy-port
-     moduleRef:
-       id: proxy
-       output: proxy-port
+       output: proxy_endpoint
    - name: ibmcloud_api_key
      scope: global
    - name: resource_group_name

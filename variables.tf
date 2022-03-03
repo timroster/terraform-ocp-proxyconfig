@@ -16,14 +16,12 @@ variable "region" {
   default     = ""
 }
 
-variable "proxy-host" {
-  type        = string
-  description = "IP address or hostname of http proxy"
-}
-
-variable "proxy-port" {
-  type        = string
-  description = "port exposed by http proxy"
+variable "proxy_endpoint" {
+  type = object({
+    proxy_host = string
+    proxy_port = string
+  })
+  description = "Host and port exposed by HTTP tunnel proxy"
 }
 
 variable "cluster_config_file" {
@@ -49,7 +47,7 @@ variable "allow_network" {
   default     = "10.0.0.0/8"
 }
 
-variable "no-proxy-hosts" {
+variable "no_proxy_hosts" {
   type        = string
   description = "List (comma separated) of hosts to skip from the proxy, used for all cluster types"
   default     = "s3.direct.us.cloud-object-storage.appdomain.cloud"

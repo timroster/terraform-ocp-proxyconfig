@@ -2,13 +2,13 @@ locals {
   tmp_dir          = "${path.cwd}/.tmp"
   crio_config_file = "${local.tmp_dir}/crio-config.yaml"
   proxy-config = templatefile("${path.module}/templates/_template_proxy-config.yaml", {
-    "proxy_ip"       = var.proxy-host,
-    "proxy_port"     = var.proxy-port,
-    "no_proxy_hosts" = var.no-proxy-hosts
+    "proxy_ip"       = var.proxy_endpoint.proxy_host,
+    "proxy_port"     = var.proxy_endpoint.proxy_port,
+    "no_proxy_hosts" = var.no_proxy_hosts
   })
   crio-config = templatefile("${path.module}/templates/_template_setcrioproxy.yaml", {
-    "proxy_ip"              = var.proxy-host,
-    "proxy_port"            = var.proxy-port,
+    "proxy_ip"              = var.proxy_endpoint.proxy_host,
+    "proxy_port"            = var.proxy_endpoint.proxy_port,
     "cluster_local"         = var.allow_network,
     "ocp_release_dev_image" = var.ocp-release-dev-image
   })
