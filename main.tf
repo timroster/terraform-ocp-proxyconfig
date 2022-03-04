@@ -87,7 +87,7 @@ resource "null_resource" "apply-crio-config" {
   }
 
   provisioner "local-exec" {
-    command = "kubectl rollout status daemonset -n kube-system https-proxy-mod --timeout 120s"
+    command = "kubectl rollout status daemonset -n kube-system https-proxy-mod --timeout 240s"
 
     environment = {
       KUBECONFIG = var.cluster_config_file
@@ -118,7 +118,7 @@ resource "null_resource" "apply-crio-config" {
   provisioner "local-exec" {
     when = destroy
 
-    command = "kubectl rollout status daemonset -n kube-system https-proxy-remove --timeout 120s"
+    command = "kubectl rollout status daemonset -n kube-system https-proxy-remove --timeout 240s"
 
     environment = {
       KUBECONFIG = self.triggers.kubeconfig
