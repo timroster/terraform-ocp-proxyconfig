@@ -1,6 +1,8 @@
 module "cluster" {
   source = "github.com/cloud-native-toolkit/terraform-ibm-ocp-vpc.git"
 
+  depends_on = [ module.cos, module.subnets, module.vpc ]
+
   resource_group_name = module.resource_group.name
   region              = var.region
   ibmcloud_api_key    = var.ibmcloud_api_key
