@@ -1,6 +1,6 @@
 module "ocp_proxy_module" {
-  #source = "./module"
-  source = "../../"
+  source = "./module"
+  #source = "../../"
 
   depends_on = [ module.proxy, module.dev_cluster ]
 
