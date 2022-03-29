@@ -1,4 +1,4 @@
-module "dev_cluster" {
+module "cluster" {
   source = "github.com/cloud-native-toolkit/terraform-ibm-ocp-vpc.git"
 
   resource_group_name = module.resource_group.name
