@@ -1,6 +1,6 @@
 locals {
-  tmp_dir          = "${path.cwd}/.tmp"
-  crio_config_file = "${local.tmp_dir}/crio-config.yaml"
+  yaml_dir          = "${path.cwd}/.yaml"
+  crio_config_file = "${local.yaml_dir}/crio-config.yaml"
   proxy-config = templatefile("${path.module}/templates/_template_proxy-config.yaml", {
     "proxy_ip"       = var.proxy_endpoint.proxy_host,
     "proxy_port"     = var.proxy_endpoint.proxy_port,
@@ -19,19 +19,19 @@ locals {
 
 ## Standard proxy config file for OCP
 resource "local_file" "proxy-config" {
-  filename = "${local.tmp_dir}/proxy-config.yaml"
+  filename = "${local.yaml_dir}/proxy-config.yaml"
   content  = local.proxy-config
 }
 
 ## Config file for ROKS - daemonset to patch crio networking to use proxy
 resource "local_file" "crio-config" {
-  filename = "${local.tmp_dir}/crio-config.yaml"
+  filename = "${local.yaml_dir}/crio-config.yaml"
   content  = local.crio-config
 }
 
 ## Config file for ROKS - daemonset to remove modifications to crio networking
 resource "local_file" "crio-unconfig" {
-  filename = "${local.tmp_dir}/crio-unconfig.yaml"
+  filename = "${local.yaml_dir}/crio-unconfig.yaml"
   content  = local.crio-unconfig
 }
 
@@ -44,7 +44,7 @@ resource "null_resource" "apply-proxy-config" {
   }
 
   provisioner "local-exec" {
-    command = "kubectl apply -f ${local.tmp_dir}/proxy-config.yaml"
+    command = "kubectl apply -f ${local.yaml_dir}/proxy-config.yaml"
 
     environment = {
       KUBECONFIG = var.cluster_config_file
@@ -69,17 +69,17 @@ resource "null_resource" "apply-crio-config" {
 
   triggers = {
     kubeconfig          = var.cluster_config_file
-    crio-config-file    = "${local.tmp_dir}/crio-config.yaml"
+    crio-config-file    = "${local.yaml_dir}/crio-config.yaml"
     ibmcloud_api_key    = var.ibmcloud_api_key
     cluster_name        = var.cluster_name
     region              = var.region
     resource_group_name = var.resource_group_name
-    crio-unconfig-file  = "${local.tmp_dir}/crio-unconfig.yaml"
+    crio-unconfig-file  = "${local.yaml_dir}/crio-unconfig.yaml"
   }
 
   ### first three provisioners ensure ROKS workers have crio-config and are rebooted to use proxy
   provisioner "local-exec" {
-    command = "kubectl apply -f ${local.tmp_dir}/crio-config.yaml"
+    command = "kubectl apply -f ${local.yaml_dir}/crio-config.yaml"
 
     environment = {
       KUBECONFIG = var.cluster_config_file

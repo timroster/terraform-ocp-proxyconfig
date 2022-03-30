@@ -41,7 +41,7 @@ module "ocp_proxy_module" {
   region              = var.region
   roks_cluster        = true
   proxy_endpoint      = module.proxy.proxy_endpoint
-  cluster_config_file = module.dev_cluster.platform.kubeconfig
-  cluster_name        = module.dev_cluster.name
+  cluster_config_file = module.cluster.platform.kubeconfig
+  cluster_name        = module.cluster.name
 }
 ```

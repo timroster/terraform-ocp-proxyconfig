@@ -15,23 +15,15 @@ variable "region" {
   description = "Region for VLANs defined in private_vlan_number and public_vlan_number."
 }
 
-variable "proxy_endpoint" {
-  type = object({
-    proxy_host = string
-    proxy_port = string
-  })
-  description = "Host and port exposed by HTTP tunnel proxy"
-}
-
 variable "cluster_name" {
   type        = string
   description = "The name of the cluster"
   default     = ""
 }
 
-variable "cluster_exists" {
-  type        = string
-  description = "Flag indicating if the cluster already exists (true or false)"
+variable "roks_cluster" {
+  type        = bool
+  description = "Flag indicating that this is a ROKS cluster"
   default     = "true"
 }
 
@@ -47,8 +39,36 @@ variable "vpc_cluster" {
   default     = true
 }
 
-variable "roks_cluster" {
-  type        = bool
-  description = "Flag indicating that this is a ROKS cluster"
+variable "vpc_public_gateway" {
+  type        = string
+  description = "Flag indicating the public gateway should be created"
+  default     = "true"
+}
+
+variable "vpc_subnet_count" {
+  type        = number
+  description = "The number of subnets to create for the VPC instance"
+  default     = 0
+}
+
+variable "vpc_subnets" {
+  type        = string
+  description = "JSON representation of list of object, e.g. [{\"label\"=\"default\"}]"
+  default     = "[]"
+}
+
+variable "worker_count" {
+  type        = number
+  default     = 2
+}
+
+variable "ocp_version" {
+  type        = string
+  default     = "4.8"
+}
+
+variable "vpc_subnet_label" {
+  type        = string
+  default     = "cluster"
 }
 
