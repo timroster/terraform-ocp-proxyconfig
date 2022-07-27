@@ -1,5 +1,5 @@
 module "proxy" {
-  source = "github.com/timroster/terraform-vsi-proxy"
+  source = "github.com/cloud-native-toolkit/terraform-ibm-vsi-proxy.git"
 
   resource_group_name    = module.resource_group.name
   region                 = var.region
