@@ -12,9 +12,11 @@ locals {
     "proxy_port"            = var.proxy_endpoint.proxy_port,
     "cluster_local"         = var.allow_network,
     "ocp_release_dev_image" = var.ocp-release-dev-image
+    "crio-config-file"      = lookup(var.crio_configfile_map, var.ocp_version).crio_configfile
   })
   crio-unconfig = templatefile("${path.module}/templates/_template_rmcrioproxy.yaml", {
     "ocp_release_dev_image" = var.ocp-release-dev-image
+    "crio-config-file"      = lookup(var.crio_configfile_map, var.ocp_version).crio_configfile
   })
 }
 

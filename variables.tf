@@ -59,6 +59,11 @@ variable "ocp-release-dev-image" {
   default     = "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:3d0aa55199bceb4c94698432df382b1d7289bf361a35ca4954a5a255b82a0e03"
 }
 
+variable "ocp_version" {
+  type        = string
+  description = "The version of the OpenShift cluster that should be provisioned (format 4.x)"
+}
+
 variable "roks_cluster" {
   type        = bool
   description = "Variable to identify if the cluster is Red Hat OpenShift on IBM Cloud"
@@ -78,6 +83,18 @@ variable "cos_regions_map" {
       "au-syd"   = { cosEndpoint = "s3.direct.au-syd.cloud-object-storage.appdomain.cloud" },
       "ca-tor"   = { cosEndpoint = "s3.direct.ca-tor.cloud-object-storage.appdomain.cloud" },
       "br-sao"   = { cosEndpoint = "s3.direct.br-sao.cloud-object-storage.appdomain.cloud" },
+  }
+}
+
+variable "crio_configfile_map" {
+  type        = map(any)
+  description = "cri-o config file location by OCP version"
+  default = {
+      "4.6" = { crio_configfile = "crio-network" },
+      "4.7" = { crio_configfile = "crio-network" },
+      "4.8" = { crio_configfile = "crio-network" },
+      "4.9" = { crio_configfile = "crio" },
+      "4.10" = { crio_configfile = "crio" },
   }
 }
 
