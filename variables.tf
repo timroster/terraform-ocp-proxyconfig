@@ -50,7 +50,7 @@ variable "allow_network" {
 variable "no_proxy_hosts" {
   type        = string
   description = "List (comma separated) of hosts to skip from the proxy, used for all cluster types"
-  default     = "s3.direct.us.cloud-object-storage.appdomain.cloud"
+  default     = ""
 }
 
 variable "ocp-release-dev-image" {
@@ -63,5 +63,21 @@ variable "roks_cluster" {
   type        = bool
   description = "Variable to identify if the cluster is Red Hat OpenShift on IBM Cloud"
   default     = false
+}
+
+variable "cos_regions_map" {
+  type        = map(any)
+  description = "IBM Cloud Region COS endpoints"
+  default = {
+      "us-south" = { cosEndpoint = "s3.direct.us-south.cloud-object-storage.appdomain.cloud" },
+      "us-east"  = { cosEndpoint = "s3.direct.us-east.cloud-object-storage.appdomain.cloud" },
+      "eu-gb"    = { cosEndpoint = "s3.direct.eu-gb.cloud-object-storage.appdomain.cloud" },
+      "eu-de"    = { cosEndpoint = "s3.direct.eu-de.cloud-object-storage.appdomain.cloud" },
+      "jp-tok"   = { cosEndpoint = "s3.direct.jp-tok.cloud-object-storage.appdomain.cloud" },
+      "jp-osa"   = { cosEndpoint = "s3.direct.jp-osa.cloud-object-storage.appdomain.cloud" },
+      "au-syd"   = { cosEndpoint = "s3.direct.au-syd.cloud-object-storage.appdomain.cloud" },
+      "ca-tor"   = { cosEndpoint = "s3.direct.ca-tor.cloud-object-storage.appdomain.cloud" },
+      "br-sao"   = { cosEndpoint = "s3.direct.br-sao.cloud-object-storage.appdomain.cloud" },
+  }
 }
 
