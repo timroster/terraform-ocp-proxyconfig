@@ -1,10 +1,11 @@
 locals {
   yaml_dir          = "${path.cwd}/.yaml"
   crio_config_file = "${local.yaml_dir}/crio-config.yaml"
+  s3_endpoint      = lookup(var.cos_regions_map, var.region).cosEndpoint
   proxy-config = templatefile("${path.module}/templates/_template_proxy-config.yaml", {
     "proxy_ip"       = var.proxy_endpoint.proxy_host,
     "proxy_port"     = var.proxy_endpoint.proxy_port,
-    "no_proxy_hosts" = var.no_proxy_hosts
+    "no_proxy_hosts" = join(",", [local.s3_endpoint, var.no_proxy_hosts])
   })
   crio-config = templatefile("${path.module}/templates/_template_setcrioproxy.yaml", {
     "proxy_ip"              = var.proxy_endpoint.proxy_host,
