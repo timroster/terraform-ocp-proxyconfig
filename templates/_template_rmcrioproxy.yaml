@@ -19,7 +19,7 @@ spec:
         - command: ["/bin/sh", "-c"]
           args:
             - >
-              rm -rf /host/etc/sysconfig/crio-network
+              rm -rf /host/etc/sysconfig/${crio-config-file}
           image: ${ocp_release_dev_image}
           imagePullPolicy: IfNotPresent
           name: crio-proxy-setup

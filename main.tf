@@ -5,16 +5,18 @@ locals {
   proxy-config = templatefile("${path.module}/templates/_template_proxy-config.yaml", {
     "proxy_ip"       = var.proxy_endpoint.proxy_host,
     "proxy_port"     = var.proxy_endpoint.proxy_port,
-    "no_proxy_hosts" = join(",", [local.s3_endpoint, var.no_proxy_hosts])
+    "no_proxy_hosts" = var.no_proxy_hosts != "" ? join(",", [local.s3_endpoint, var.no_proxy_hosts]) : local.s3_endpoint
   })
   crio-config = templatefile("${path.module}/templates/_template_setcrioproxy.yaml", {
     "proxy_ip"              = var.proxy_endpoint.proxy_host,
     "proxy_port"            = var.proxy_endpoint.proxy_port,
     "cluster_local"         = var.allow_network,
     "ocp_release_dev_image" = var.ocp-release-dev-image
+    "crio-config-file"      = lookup(var.crio_configfile_map, var.ocp_version).crio_configfile
   })
   crio-unconfig = templatefile("${path.module}/templates/_template_rmcrioproxy.yaml", {
     "ocp_release_dev_image" = var.ocp-release-dev-image
+    "crio-config-file"      = lookup(var.crio_configfile_map, var.ocp_version).crio_configfile
   })
 }
 
