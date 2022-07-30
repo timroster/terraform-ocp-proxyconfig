@@ -11,16 +11,12 @@ versions:
   dependencies:
    - id: cluster
      refs:
-       - source: github.com/cloud-native-toolkit/terraform-ibm-container-platform
-         version: ">= 1.21.1"
-       - source: github.com/cloud-native-toolkit/terraform-k8s-ocp-cluster
-         version: ">= 2.4.7"
        - source: github.com/cloud-native-toolkit/terraform-ibm-ocp-vpc
-         version: ">= 1.12.1"
+         version: ">= 1.15.6"
    - id: proxy
      refs:
        - source: github.com/ibm-garage-cloud/terraform-vsi-proxy
-         version: ">= 1.0.0"
+         version: ">= 0.1.0"
   variables:
    - name: cluster_type
      moduleRef:

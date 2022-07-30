@@ -60,8 +60,10 @@ variable "ocp-release-dev-image" {
 }
 
 variable "ocp_version" {
+# this should default to the default in https://github.com/cloud-native-toolkit/terraform-ibm-ocp-vpc/blob/main/variables.tf
   type        = string
-  description = "The version of the OpenShift cluster that should be provisioned (format 4.x)"
+  description = "The version of the OpenShift cluster that will be configured to use the proxy endpoint (format 4.x)"
+  default     = "4.10"
 }
 
 variable "roks_cluster" {
